@@ -1,7 +1,32 @@
 .card {
-  background: grey;
+  background: lightslategrey;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   margin: 30px;
   padding: 10px;
+  gap: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
+}
+
+.details {
+  background: lightslategrey;
+  display: flex;
+  flex-direction: row;
+  margin: 30px;
+  padding: 10px;
+  gap: 20px;
+  width: 80%;
+  height: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

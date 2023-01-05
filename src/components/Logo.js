@@ -1,8 +1,9 @@
 import React from "react";
-export default function (props) {
+import { Link } from "react-router-dom";
+export default function Logo(props) {
   return (
-    <div>
-      <p>Logo</p>
-    </div>
+    <Link className="navbar-brand" to="/movies">
+      Logo
+    </Link>
   );
 }
