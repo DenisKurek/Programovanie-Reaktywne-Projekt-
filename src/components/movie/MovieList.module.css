@@ -30,3 +30,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.movie {
+  width: 300px;
+}
+
+.deleteButton {
+  width: 200px;
+  height: 100px;
+  position: fixed;
+  top: 100%;
+  left: 100%;
+  transform: translate(-100%, -100%);
+}

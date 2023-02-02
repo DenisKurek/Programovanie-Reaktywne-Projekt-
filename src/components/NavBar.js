@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../store/auth-context";
 
 export default function NavBar() {
+  const ctx = useContext(AuthContext);
+
   return (
-    <div class="nav">
+    <div className="nav">
       <Link className="nav-item nav-link text-light" to="/">
         Home
       </Link>
-      <Link className="nav-item nav-link text-light" to="/add">
-        add movie
-      </Link>
+      {ctx.isLogged && (
+        <Link className="nav-item nav-link text-light" to="/add">
+          add movie
+        </Link>
+      )}
     </div>
   );
 }

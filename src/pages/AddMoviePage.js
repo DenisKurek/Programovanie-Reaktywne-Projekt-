@@ -1,51 +1,68 @@
-import React from "react";
-import Card from "../components/UI/Card";
+import React, { useRef } from "react";
 import classes from "./Forms.module.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export default function AddMoviePage(props) {
+  const title = useRef();
+  const image = useRef();
+  const content = useRef();
+  const navigate = useHistory();
+
+  function addMovie() {
+    axios({
+      method: "post",
+      url: "https://at.usermd.net/api/movies",
+      data: {
+        title: title.current.value,
+        image: image.current.value,
+        content: content.current.value,
+      },
+    });
+  }
+
   return (
-    <Card className={`${classes.card} ${classes.centered}`}>
-      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add Movie</p>
-      <form>
+    <div className={`${classes.card} ${classes.centered}`}>
+      <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add Movie</p>
+      <form
+        onSubmit={() => {
+          addMovie();
+          navigate.push("/movies");
+        }}
+      >
         <div className="form-outline mb-4">
           <input
             type="text"
             id="name"
-            placeholder="nazwa"
+            placeholder="tytuł"
             className="form-control"
+            ref={title}
           />
         </div>
         <div className="form-outline mb-4">
           <input
             type="text"
-            id="date"
-            placeholder="data produkcji"
+            id="image"
+            placeholder="url obrazu"
             className="form-control"
+            ref={image}
           />
         </div>
         <div className="form-outline mb-4">
           <input
             type="text"
-            id="genre"
-            placeholder="gatunek"
+            id="content"
+            placeholder="opis"
             className="form-control"
-          />
-        </div>
-        <div className="form-outline mb-4">
-          <input
-            type="text"
-            id="director"
-            placeholder="reżyser"
-            className="form-control"
+            ref={content}
           />
         </div>
         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-          <Link to="/" className="btn btn-primary btn-lg">
+          <button type="submit" className="btn btn-primary btn-lg">
             Add
-          </Link>
+          </button>
         </div>
       </form>
-    </Card>
+    </div>
   );
 }

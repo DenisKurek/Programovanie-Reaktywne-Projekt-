@@ -1,19 +1,40 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Card from "../components/UI/Card";
+import React, { useContext, useRef } from "react";
+import { Link, useHistory } from "react-router-dom";
 import classes from "./Forms.module.css";
+import axios from "axios";
+import AuthContext from "../store/auth-context";
 
 export default function LoginPage(props) {
+  const loginRef = useRef();
+  const passwordRef = useRef();
+  const ctx = useContext(AuthContext);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    axios({
+      method: "post",
+      url: "https://at.usermd.net/api/user/auth",
+      data: {
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      },
+    }).then((response) => {
+      ctx.logInHandler(response.data.token);
+    });
+  }
+
   return (
-    <Card className={`${classes.card} ${classes.centered}`}>
-      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign in</p>
-      <form>
+    <div className={`${classes.card} ${classes.centered}`}>
+      <p classNaame="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign in</p>
+      <form onSubmit={handleSubmit}>
         <div className="form-outline mb-4">
           <input
-            type="email"
-            id="email"
-            placeholder="Email address"
+            type="text"
+            id="login"
+            placeholder="login"
             className="form-control"
+            ref={loginRef}
           />
         </div>
         <div className="form-outline mb-4">
@@ -22,6 +43,7 @@ export default function LoginPage(props) {
             id="password"
             placeholder="Password"
             className="form-control"
+            ref={passwordRef}
           />
         </div>
         <div className="text-center">
@@ -30,11 +52,11 @@ export default function LoginPage(props) {
           </p>
         </div>
         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-          <Link to="/" className="btn btn-primary btn-lg">
+          <button type="submit" className="btn btn-primary btn-lg">
             Sign in
-          </Link>
+          </button>
         </div>
       </form>
-    </Card>
+    </div>
   );
 }

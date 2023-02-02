@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function SearchBar(props) {
   return (
@@ -9,6 +9,7 @@ export default function SearchBar(props) {
           type="search"
           placeholder="Search"
           aria-label="Search"
+          onChange={(event) => props.onChange(event.target.value)}
         />
       </div>
     </form>

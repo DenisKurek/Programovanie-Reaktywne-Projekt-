@@ -1,27 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Card from "../UI/Card";
-import TitleCard from "./TitleCard";
 
 export default function (props) {
+  const content =
+    props.content.length > 300
+      ? props.content.substr(0, 297) + "..."
+      : props.content;
   return (
-    <Card className="card">
-      <Link to="/details">
-        <img
-          className="card-img-top"
-          id="filmPoster"
-          src="https://fwcdn.pl/fpo/08/62/862/7517878.6.jpg"
-          alt=" plakat"
-          loading="lazy"
-        />
+    <div className={`card ${props.className} `}>
+      <Link to={`/details/${props.id}`}>
+        <img className="card-img-top" src={props.image} />
       </Link>
       <div className="card-body">
-        <TitleCard />
+        <h5 className="card-title">{props.title}</h5>
+        <p className="card-text">{content}</p>
       </div>
-      <ul className="list-group list-group-flush">
-        <li className="list-group-item">gatunek: Dramat</li>
-        <li className="list-group-item">reżyser: Frank Darabont</li>
-      </ul>
-    </Card>
+    </div>
   );
 }
